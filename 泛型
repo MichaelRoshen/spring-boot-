@@ -1,0 +1,35 @@
+
+https://blog.csdn.net/songkai320/article/details/51822497
+
+class GenericsTest<T extends Collection>，这样类中的泛型T只能是Collection接口的实现类，传入非Collection接口编译会出错。
+注意：<T extends Collection>这里的限定使用关键字extends，后面可以是类也可以是接口。但这里的extends已经不是继承的含义了，应该理解为T类型是实现Collection接口的类型，或者T是继承了XX类的类型。
+
+public class CollectionGenTest<T extends Collection> {
+
+    private T x;
+
+ 
+
+    public CollectionGenTest(T x) {
+
+        this.x = x;
+
+    }
+
+ 
+
+    public T getX() {
+
+        return x;
+
+    }
+
+ 
+
+    public void setX(T x) {
+
+        this.x = x;
+
+    }
+
+}
