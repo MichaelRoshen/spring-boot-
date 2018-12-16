@@ -29,11 +29,11 @@ List按属性去重
     }
 
     //并集
-    private List<Person> unionDistinctPerson(List<Person> regEventList, List<Person> inteEventList) {
+    private List<Person> unionDistinctPerson(List<Person> list1, List<Person> list2) {
         List<Person> list=new ArrayList<Person>();
-        list.addAll(regEventList);
-        list.addAll(inteEventList);
-        List<Person> uniqEventList = list.stream().filter(distinctByKey(EventDO::getName)).collect(Collectors.toList());
+        list.addAll(list1);
+        list.addAll(list2);
+        List<Person> uniqEventList = list.stream().filter(distinctByKey(Person::getName)).collect(Collectors.toList());
         return result;
     }
 
