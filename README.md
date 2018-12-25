@@ -6,6 +6,25 @@ java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
 
 Mybatis 在 Spring 下使用多数据源： https://xli1224.github.io/2018/03/11/spring-mybatis-multiple-datasource/
 
+分布式锁的实现与应用场景对比: https://blog.csdn.net/lemon89/article/details/52796775
+分布式锁的几种实现方式: https://www.cnblogs.com/austinspark-jessylu/p/8043726.html
+
+
+```ruby
+List<Person> list = new ArrayList<>();
+        list.add(new Person("name", 1));
+        list.add(new Person("name", 2));
+        list.add(new Person("name", 3));
+
+//        累加 {name=6}
+        Map<String, Integer> result1 = list.stream().collect(Collectors.toMap(Person::getName, Person::getAge, (p1, p2) -> p1+p2));
+//        去重{name=1}
+        Map<String, Integer> result2 = list.stream().collect(Collectors.toMap(Person::getName, Person::getAge, (p1, p2) -> p1));
+//        去重{name=3}
+        Map<String, Integer> result2 = list.stream().collect(Collectors.toMap(Person::getName, Person::getAge, (p1, p2) -> p1));
+
+```
+
 ```ruby
 List按属性去重
     //差集
