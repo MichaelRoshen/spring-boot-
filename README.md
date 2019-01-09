@@ -70,3 +70,15 @@ JSONObject jsonApiResult = JSON.parseObject(apiResult);
 List<Map> list = JSON.toJavaObject(jsonApiResult.getJSONArray("data"), List.class);
 ```
 
+List按一个或多个对象属性去重
+```ruby
+List<User> unique2 = list.stream().collect(
+                collectingAndThen(
+                        toCollection(() -> new TreeSet<>(Comparator.comparing(o -> o.getName() + ";" + o.getAge()))), ArrayList::new)
+        );
+
+List<User> unique1 = list.stream().collect(
+                collectingAndThen(
+                        toCollection(() -> new TreeSet<>(Comparator.comparing(User::getName))), ArrayList::new));
+
+```
