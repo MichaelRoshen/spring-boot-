@@ -82,3 +82,5 @@ List<User> unique1 = list.stream().collect(
                         toCollection(() -> new TreeSet<>(Comparator.comparing(User::getName))), ArrayList::new));
 
 ```
+
+Java Stream API groupingBy()  https://www.jdon.com/50132
