@@ -10,6 +10,11 @@ Mybatis 在 Spring 下使用多数据源： https://xli1224.github.io/2018/03/11
 
 分布式锁的几种实现方式: https://www.cnblogs.com/austinspark-jessylu/p/8043726.html
 
+Spring boot 异步开发之异步请求: https://www.jianshu.com/p/fb34041fa0a3
+
+spring boot--使用异步请求，提高系统的吞吐量: https://blog.csdn.net/liuchuanhong1/article/details/78744138
+
+tomcat7中maxConnections、maxThreads、acceptCount的含义及关系: https://blog.csdn.net/kaka20099527/article/details/53285348/
 
 ```ruby
 List<Person> list = new ArrayList<>();
