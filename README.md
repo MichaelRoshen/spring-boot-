@@ -14,6 +14,12 @@ Spring boot 异步开发之异步请求: https://www.jianshu.com/p/fb34041fa0a3
 
 spring boot--使用异步请求，提高系统的吞吐量: https://blog.csdn.net/liuchuanhong1/article/details/78744138
 
+live template:
+intellij idea live template: https://www.youtube.com/watch?v=Q-aNE0RvBlg
+Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-live-templates
+
+消息队列及常见消息队列介绍: https://cloud.tencent.com/developer/article/1006035
+
 tomcat7中maxConnections、maxThreads、acceptCount的含义及关系: https://blog.csdn.net/kaka20099527/article/details/53285348/
 
 ```ruby
