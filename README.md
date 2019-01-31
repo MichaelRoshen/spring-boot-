@@ -22,6 +22,9 @@ Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-li
 https://cloud.tencent.com/developer/article/1006035
 https://segmentfault.com/a/1190000015301449
 
+Spring Boot优雅编码之：Lombok加持：
+https://www.jianshu.com/p/c88b0f17f62a
+
 tomcat7中maxConnections、maxThreads、acceptCount的含义及关系: https://blog.csdn.net/kaka20099527/article/details/53285348/
 
 ```ruby
