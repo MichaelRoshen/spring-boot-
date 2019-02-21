@@ -29,6 +29,10 @@ https://www.jianshu.com/p/c88b0f17f62a
 
 tomcat7中maxConnections、maxThreads、acceptCount的含义及关系: https://blog.csdn.net/kaka20099527/article/details/53285348/
 
+Dozer 使用 
+https://dunwu.github.io/blog/page/7/
+http://dozer.sourceforge.net/documentation/annotations.html
+
 ```ruby
 List<Person> list = new ArrayList<>();
         list.add(new Person("name", 1));
