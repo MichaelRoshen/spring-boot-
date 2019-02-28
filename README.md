@@ -24,6 +24,9 @@ Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-li
 https://cloud.tencent.com/developer/article/1006035
 https://segmentfault.com/a/1190000015301449
 
+kafaka介绍
+https://www.cnblogs.com/skying555/p/7903457.html
+
 Spring Boot优雅编码之：Lombok加持：
 https://www.jianshu.com/p/c88b0f17f62a
 
