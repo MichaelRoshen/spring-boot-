@@ -33,6 +33,10 @@ Dozer 使用
 https://dunwu.github.io/blog/page/7/
 http://dozer.sourceforge.net/documentation/annotations.html
 
+
+JVM 的 工作原理，层次结构 以及 GC工作原理
+https://segmentfault.com/a/1190000002579346#articleHeader6
+
 ```ruby
 List<Person> list = new ArrayList<>();
         list.add(new Person("name", 1));
