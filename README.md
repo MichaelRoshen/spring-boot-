@@ -24,6 +24,9 @@ Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-li
 https://cloud.tencent.com/developer/article/1006035
 https://segmentfault.com/a/1190000015301449
 
+消息队列面试
+https://segmentfault.com/a/1190000015301449?utm_source=tag-newest
+
 kafaka介绍
 https://www.cnblogs.com/skying555/p/7903457.html
 
