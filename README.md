@@ -16,6 +16,8 @@ spring boot--使用异步请求，提高系统的吞吐量: https://blog.csdn.ne
 
 ThreadLocal-面试必问深度解析: https://www.jianshu.com/p/98b68c97df9b
 
+java递归生成树形结构菜单： https://blog.csdn.net/LDY1016/article/details/85784001
+
 live template:
 intellij idea live template: https://www.youtube.com/watch?v=Q-aNE0RvBlg
 Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-live-templates
