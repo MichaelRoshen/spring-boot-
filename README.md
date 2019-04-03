@@ -17,6 +17,7 @@
 
 ## 算法实战
 - java递归生成树形结构菜单： https://blog.csdn.net/LDY1016/article/details/85784001
+- 无限级菜单/权限树该如何设计：http://www.zhaojun.im/permission-tree/
 
 ## Mybatis
 - Mybatis 在 Spring 下使用多数据源： https://xli1224.github.io/2018/03/11/spring-mybatis-multiple-datasource/
