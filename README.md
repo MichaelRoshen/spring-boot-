@@ -5,6 +5,7 @@
 - 异步开发之异步请求: https://www.jianshu.com/p/fb34041fa0a3
 - 使用异步请求，提高系统的吞吐量: https://blog.csdn.net/liuchuanhong1/article/details/78744138
 - 优雅编码之：Lombok加持：https://www.jianshu.com/p/c88b0f17f62a
+- Spring MVC/Boot 统一异常处理最佳实践：http://www.zhaojun.im/springboot-exception/
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
