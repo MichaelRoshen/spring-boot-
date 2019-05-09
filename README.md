@@ -22,6 +22,7 @@
 
 ## Mybatis
 - Mybatis 在 Spring 下使用多数据源： https://xli1224.github.io/2018/03/11/spring-mybatis-multiple-datasource/
+- SpringBoot mybatis三种整合方式 https://my.oschina.net/wangnian/blog/667764
 
 
 ## 分布式
