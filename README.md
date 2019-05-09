@@ -14,7 +14,7 @@
 
 ## java效率工具
 - Dozer 使用 https://dunwu.github.io/blog/page/7/
-- Dozer 使用 http://dozer.sourceforge.net/documentation/annotations.html
+- Dozer 使用 https://www.hollischuang.com/archives/1613
 
 ## 算法实战
 - java递归生成树形结构菜单： https://blog.csdn.net/LDY1016/article/details/85784001
