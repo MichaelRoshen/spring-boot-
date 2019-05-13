@@ -10,6 +10,7 @@
 - Spring Boot 全局异常处理 与 Hibernate Validator校验框架整合：https://blog.csdn.net/Anenan/article/details/84313934
 - Spring Boot 2.x 拦截器 https://my.oschina.net/u/182501/blog/1808140
 - Springboot系列文章之过滤器 vs 拦截器 https://juejin.im/post/5ba3bdae6fb9a05cfc54d16d
+- Filter、interception、AOP之间对比: https://www.jianshu.com/p/cd9875bd7161
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
