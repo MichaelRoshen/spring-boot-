@@ -6,8 +6,9 @@
 - 使用异步请求，提高系统的吞吐量: https://blog.csdn.net/liuchuanhong1/article/details/78744138
 - 优雅编码之：Lombok加持：https://www.jianshu.com/p/c88b0f17f62a
 - Spring MVC/Boot 统一异常处理最佳实践：http://www.zhaojun.im/springboot-exception/
-- springboot使用hibernate validator校验: https://www.cnblogs.com/mr-yang-localhost/p/7812038.html
+- Spring Boot 使用hibernate validator校验: https://www.cnblogs.com/mr-yang-localhost/p/7812038.html
 - Spring Boot 全局异常处理 与 Hibernate Validator校验框架整合：https://blog.csdn.net/Anenan/article/details/84313934
+- Spring Boot 2.x 拦截器 https://my.oschina.net/u/182501/blog/1808140
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
