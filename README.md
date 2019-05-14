@@ -12,6 +12,8 @@
 - Springboot系列文章之过滤器 vs 拦截器 https://juejin.im/post/5ba3bdae6fb9a05cfc54d16d
 - Filter、interception、AOP之间对比: https://www.jianshu.com/p/cd9875bd7161
 - Spring Boot整合Ehcache实现缓存功能: https://www.jianshu.com/p/112a11d2918b
+- 用自定义注解做点什么 https://juejin.im/entry/57e496fd7db2a20063a24a3a
+- Java自定义注解 https://www.jianshu.com/p/a08e7e9ed765
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
