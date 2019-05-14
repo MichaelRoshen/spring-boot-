@@ -18,6 +18,7 @@
 - springboot使用注解的方式记录用户业务操作实战 ：http://www.voidcn.com/article/p-vyhiuwez-bow.html 
 - 项目：https://github.com/stylefeng/Guns
 - 深入理解Java线程池：ScheduledThreadPoolExecutor: https://www.jianshu.com/p/925dba9f5969
+- slf4j与jul、log4j1、log4j2、logback的集成原理: https://my.oschina.net/xianggao/blog/516947
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
