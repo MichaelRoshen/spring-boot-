@@ -17,6 +17,7 @@
 - 日志管理器（异步操作记录日志的线程池) :https://blog.csdn.net/huangbaokang/article/details/74229845
 - springboot使用注解的方式记录用户业务操作实战 ：http://www.voidcn.com/article/p-vyhiuwez-bow.html 
 - 项目：https://github.com/stylefeng/Guns
+- 深入理解Java线程池：ScheduledThreadPoolExecutor: https://www.jianshu.com/p/925dba9f5969
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
