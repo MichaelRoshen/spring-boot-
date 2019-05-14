@@ -14,6 +14,9 @@
 - Spring Boot整合Ehcache实现缓存功能: https://www.jianshu.com/p/112a11d2918b
 - 用自定义注解做点什么 https://juejin.im/entry/57e496fd7db2a20063a24a3a
 - Java自定义注解 https://www.jianshu.com/p/a08e7e9ed765
+- 日志管理器（异步操作记录日志的线程池) :https://blog.csdn.net/huangbaokang/article/details/74229845
+- springboot使用注解的方式记录用户业务操作实战 ：http://www.voidcn.com/article/p-vyhiuwez-bow.html 
+- 项目：https://github.com/stylefeng/Guns
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
