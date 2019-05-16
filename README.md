@@ -38,6 +38,8 @@
 - SpringBoot mybatis三种整合方式 https://my.oschina.net/wangnian/blog/667764
 - SpringBoot 集成 mybatis http://www.apigo.cn/2018/08/12/springboot6/
 
+## Shiro
+- Spring Boot + Shiro 集成: https://github.com/YorkeCao/shiro-spring-boot-sample
 
 ## 分布式
 - 分布式锁的实现与应用场景对比: https://blog.csdn.net/lemon89/article/details/52796775
