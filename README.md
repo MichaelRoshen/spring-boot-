@@ -56,6 +56,13 @@
 - 消息队列面试，https://segmentfault.com/a/1190000015301449?utm_source=tag-newest
 - kafaka介绍 https://www.cnblogs.com/skying555/p/7903457.html
 
+## 应用配置中心
+- 一篇好TM长的关于配置中心的文章 http://jm.taobao.org/2016/09/28/an-article-about-config-center/
+
+## 高性能存储引擎leveldb rockdb redis
+- 既生 Redis 何生 LevelDB ？ https://juejin.im/post/5c22e049e51d45206d12568e
+- 腾讯亿级排行榜系统实践及挑战 https://cloud.tencent.com/developer/article/1004402
+
 ## tomcat
 - tomcat7中maxConnections、maxThreads、acceptCount的含义及关系: https://blog.csdn.net/kaka20099527/article/details/53285348/
 
