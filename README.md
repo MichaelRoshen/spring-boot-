@@ -48,6 +48,7 @@
 ## 开发工具
 - live template: intellij idea live template: https://www.youtube.com/watch?v=Q-aNE0RvBlg
 - Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-live-templates
+- IntelliJ IDEA 下 Spring Boot Devtools 热部署: https://www.jianshu.com/p/9745fda3e2da
 
 ## 消息队列
 - 消息队列及常见消息队列介绍1: https://cloud.tencent.com/developer/article/1006035
