@@ -45,6 +45,9 @@
 - 分布式锁的实现与应用场景对比: https://blog.csdn.net/lemon89/article/details/52796775
 - 分布式锁的几种实现方式: https://www.cnblogs.com/austinspark-jessylu/p/8043726.html
 
+## RPC
+- RPC框架实践之：Apache Thrift: https://juejin.im/post/5afa19bf51882542653995b7
+
 ## 开发工具
 - live template: intellij idea live template: https://www.youtube.com/watch?v=Q-aNE0RvBlg
 - Matt Raible’s IntelliJ IDEA Live Templates: https://github.com/mraible/idea-live-templates
