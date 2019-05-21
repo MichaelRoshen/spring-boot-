@@ -48,6 +48,7 @@
 ## RPC
 - RPC框架实践之：Apache Thrift: https://juejin.im/post/5afa19bf51882542653995b7
 - 远程调用框架Thrift ： https://xgfe.github.io/2017/05/03/zhouxiong/Thrift/
+- RPC-Thrift 源码阅读： https://www.cnblogs.com/zaizhoumo/p/8184923.html
 
 ## 开发工具
 - live template: intellij idea live template: https://www.youtube.com/watch?v=Q-aNE0RvBlg
