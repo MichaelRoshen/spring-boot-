@@ -40,6 +40,8 @@
 
 ## Shiro
 - Spring Boot + Shiro 集成: https://github.com/YorkeCao/shiro-spring-boot-sample
+- spring boot 之使用shiro对restful接口进行认证管理 :http://blog.wuyaoyao.xyz/2018/06/29/spring-boot-%E4%BD%BF%E7%94%A8shiro%E5%AF%B9restfull%E6%8E%A5%E5%8F%A3%E8%BF%9B%E8%A1%8C%E8%AE%A4%E8%AF%81%E7%AE%A1%E7%90%86/
+
 
 ## 分布式
 - 分布式锁的实现与应用场景对比: https://blog.csdn.net/lemon89/article/details/52796775
