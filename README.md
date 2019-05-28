@@ -28,6 +28,7 @@
 ## java效率工具
 - Dozer 使用 https://dunwu.github.io/blog/page/7/
 - Dozer 使用 https://www.hollischuang.com/archives/1613
+- Mapping of java.time.LocalDate ... not working, 使用dozer-core6.4.1版本替换net.sf.dozer： https://github.com/DozerMapper/dozer/issues/172
 
 ## 算法实战
 - java递归生成树形结构菜单： https://blog.csdn.net/LDY1016/article/details/85784001
@@ -153,4 +154,3 @@ List<User> unique1 = list.stream().collect(
 
 ```
 
-Java Stream API groupingBy()  https://www.jdon.com/50132
