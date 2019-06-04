@@ -27,6 +27,7 @@ Dubbo Spring Boot	Dubbo	Spring Boot
 0.1.2.RELEASE	2.6.5+	1.x
 - dubbo-spring-boot-starter 最新版本2.7.1 https://github.com/apache/dubbo-spring-boot-project/blob/master/README_CN.md
 - 历史版本： https://github.com/apache/dubbo-spring-boot-project/blob/master/README_CN.md#%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC
+- dubbo 本地Dubbo管理控制台 (注释使用已发布的分支)https://dubbo.apache.org/zh-cn/docs/admin/introduction.html
 
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
