@@ -20,6 +20,14 @@
 - 深入理解Java线程池：ScheduledThreadPoolExecutor: https://www.jianshu.com/p/925dba9f5969
 - slf4j与jul、log4j1、log4j2、logback的集成原理: https://my.oschina.net/xianggao/blog/516947
 
+## dubbo
+- dubbo文档 https://dubbo.apache.org/zh-cn/docs/user/quick-start.html
+Dubbo Spring Boot	Dubbo	Spring Boot
+0.2.1.RELEASE	2.6.5+	2.x
+0.1.2.RELEASE	2.6.5+	1.x
+- dubbo-spring-boot-starter 最新版本2.7.1 https://github.com/apache/dubbo-spring-boot-project/blob/master/README_CN.md
+- 历史版本： https://github.com/apache/dubbo-spring-boot-project/blob/master/README_CN.md#%E5%8E%86%E5%8F%B2%E7%89%88%E6%9C%AC
+
 ## java基础
 - java 泛型: https://blog.csdn.net/songkai320/article/details/51822497
 - ThreadLocal-面试必问深度解析: https://www.jianshu.com/p/98b68c97df9b
