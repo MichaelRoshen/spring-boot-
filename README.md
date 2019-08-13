@@ -20,6 +20,9 @@
 - 深入理解Java线程池：ScheduledThreadPoolExecutor: https://www.jianshu.com/p/925dba9f5969
 - slf4j与jul、log4j1、log4j2、logback的集成原理: https://my.oschina.net/xianggao/blog/516947
 
+## 其他
+- Spring Interceptor vs Filter 拦截器和过滤器区别：http://einverne.github.io/post/2017/08/spring-interceptor-vs-filter.html
+
 ## dubbo
 - dubbo文档 https://dubbo.apache.org/zh-cn/docs/user/quick-start.html
 Dubbo Spring Boot	Dubbo	Spring Boot
