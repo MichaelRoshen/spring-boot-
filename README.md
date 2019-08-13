@@ -48,6 +48,9 @@ Dubbo Spring Boot	Dubbo	Spring Boot
 - SpringBoot mybatis三种整合方式 https://my.oschina.net/wangnian/blog/667764
 - SpringBoot 集成 mybatis http://www.apigo.cn/2018/08/12/springboot6/
 
+## 分页
+- Spring Boot集成pagehelper分页插件: https://blog.csdn.net/gnail_oug/article/details/80229542
+
 ## Shiro
 - Spring Boot + Shiro 集成: https://github.com/YorkeCao/shiro-spring-boot-sample
 - spring boot 之使用shiro对restful接口进行认证管理 :http://blog.wuyaoyao.xyz/2018/06/29/spring-boot-%E4%BD%BF%E7%94%A8shiro%E5%AF%B9restfull%E6%8E%A5%E5%8F%A3%E8%BF%9B%E8%A1%8C%E8%AE%A4%E8%AF%81%E7%AE%A1%E7%90%86/
