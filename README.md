@@ -19,6 +19,7 @@
 - 项目：https://github.com/stylefeng/Guns
 - 深入理解Java线程池：ScheduledThreadPoolExecutor: https://www.jianshu.com/p/925dba9f5969
 - slf4j与jul、log4j1、log4j2、logback的集成原理: https://my.oschina.net/xianggao/blog/516947
+- springboot系列文章之实现跨域请求(CORS) :https://juejin.im/post/5b99dcca6fb9a05d3154f8b7
 
 ## 其他
 - Spring Interceptor vs Filter 拦截器和过滤器区别：http://einverne.github.io/post/2017/08/spring-interceptor-vs-filter.html
