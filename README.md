@@ -22,6 +22,11 @@
 - springboot系列文章之实现跨域请求(CORS) :https://juejin.im/post/5b99dcca6fb9a05d3154f8b7
 - 快速开发一个自定义Spring Boot Starter，并使用它: https://www.jianshu.com/p/45538b44e04e
 
+
+## 技术方案
+- Spring Boot 构建多租户SaaS平台核心技术指南：https://juejin.im/post/5ceaff9a51882531140790a4
+
+
 ## 其他
 - Spring Interceptor vs Filter 拦截器和过滤器区别：http://einverne.github.io/post/2017/08/spring-interceptor-vs-filter.html
 
