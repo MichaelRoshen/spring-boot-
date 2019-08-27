@@ -1,0 +1,597 @@
+下面是Java线程相关的热门面试题，你可以用它来好好准备面试。
+
+什么是线程？
+什么是线程安全和线程不安全？
+什么是自旋锁？
+什么是Java内存模型？
+什么是CAS？
+什么是乐观锁和悲观锁？
+什么是AQS？
+什么是原子操作？在Java Concurrency API中有哪些原子类(atomic classes)？
+什么是Executors框架？
+什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？
+什么是Callable和Future?
+什么是FutureTask?
+什么是同步容器和并发容器的实现？
+什么是多线程？优缺点？
+什么是多线程的上下文切换？
+ThreadLocal的设计理念与作用？
+ThreadPool（线程池）用法与优势？
+Concurrent包里的其他东西：ArrayBlockingQueue、CountDownLatch等等。
+synchronized和ReentrantLock的区别？
+Semaphore有什么作用？
+Java Concurrency API中的Lock接口(Lock interface)是什么？对比同步它有什么优势？
+Hashtable的size()方法中明明只有一条语句”return count”，为什么还要做同步？
+ConcurrentHashMap的并发度是什么？
+ReentrantReadWriteLock读写锁的使用？
+CyclicBarrier和CountDownLatch的用法及区别？
+LockSupport工具？
+Condition接口及其实现原理？
+Fork/Join框架的理解?
+wait()和sleep()的区别?
+线程的五个状态（五种状态，创建、就绪、运行、阻塞和死亡）?
+start()方法和run()方法的区别？
+Runnable接口和Callable接口的区别？
+volatile关键字的作用？
+Java中如何获取到线程dump文件？
+线程和进程有什么区别？
+线程实现的方式有几种（四种）？
+高并发、任务执行时间短的业务怎样使用线程池？并发不高、任务执行时间长的业务怎样使用线程池？并发高、业务执行时间长的业务怎样使用线程池？
+如果你提交任务时，线程池队列已满，这时会发生什么？
+锁的等级：方法锁、对象锁、类锁?
+如果同步块内的线程抛出异常会发生什么？
+并发编程（concurrency）并行编程（parallellism）有什么区别？
+如何保证多线程下 i++ 结果正确？
+一个线程如果出现了运行时异常会怎么样?
+如何在两个线程之间共享数据?
+生产者消费者模型的作用是什么?
+怎么唤醒一个阻塞的线程?
+Java中用到的线程调度算法是什么
+单例模式的线程安全性?
+线程类的构造方法、静态块是被哪个线程调用的?
+同步方法和同步块，哪个是更好的选择?
+如何检测死锁？怎么预防死锁？
+什么是线程？
+线程是操作系统能够进行运算调度的最小单位，它被包含在进程之中，是进程中的实际运作单位，可以使用多线程对进行运算提速。
+
+比如，如果一个线程完成一个任务要100毫秒，那么用十个线程完成改任务只需10毫秒
+
+什么是线程安全和线程不安全？
+通俗的说：加锁的就是是线程安全的，不加锁的就是是线程不安全的
+
+线程安全
+线程安全: 就是多线程访问时，采用了加锁机制，当一个线程访问该类的某个数据时，进行保护，其他线程不能进行访问，直到该线程读取完，其他线程才可使用。不会出现数据不一致或者数据污染。
+
+一个线程安全的计数器类的同一个实例对象在被多个线程使用的情况下也不会出现计算失误。很显然你可以将集合类分成两组，线程安全和非线程安全的。 Vector 是用同步方法来实现线程安全的, 而和它相似的ArrayList不是线程安全的。
+
+线程不安全
+线程不安全：就是不提供数据访问保护，有可能出现多个线程先后更改数据造成所得到的数据是脏数据
+
+如果你的代码所在的进程中有多个线程在同时运行，而这些线程可能会同时运行这段代码。如果每次运行结果和单线程运行的结果是一样的，而且其他的变量的值也和预期的是一样的，就是线程安全的。
+
+线程安全问题都是由全局变量及静态变量引起的。 若每个线程中对全局变量、静态变量只有读操作，而无写操作，一般来说，这个全局变量是线程安全的；若有多个线程同时执行写操作，一般都需要考虑线程同步，否则的话就可能影响线程安全。
+
+什么是自旋锁？
+基本概念
+自旋锁是SMP架构中的一种low-level的同步机制。
+
+当线程A想要获取一把自选锁而该锁又被其它线程锁持有时，线程A会在一个循环中自选以检测锁是不是已经可用了。
+
+自选锁需要注意：
+
+由于自旋时不释放CPU，因而持有自旋锁的线程应该尽快释放自旋锁，否则等待该自旋锁的线程会一直在那里自旋，这就会浪费CPU时间。
+持有自旋锁的线程在sleep之前应该释放自旋锁以便其它线程可以获得自旋锁。
+实现自旋锁
+参考
+
+https://segmentfault.com/q/1010000000530936
+
+一个简单的while就可以满足你的要求。
+
+目前的JVM实现自旋会消耗CPU，如果长时间不调用doNotify方法，doWait方法会一直自旋，CPU会消耗太大。
+
+public class MyWaitNotify3{
+
+  MonitorObject myMonitorObject = new MonitorObject();
+  boolean wasSignalled = false;
+
+  public void doWait(){
+    synchronized(myMonitorObject){
+      while(!wasSignalled){
+        try{
+          myMonitorObject.wait();
+         } catch(InterruptedException e){...}
+      }
+      //clear signal and continue running.
+      wasSignalled = false;
+    }
+  }
+
+  public void doNotify(){
+    synchronized(myMonitorObject){
+      wasSignalled = true;
+      myMonitorObject.notify();
+    }
+  }
+}
+什么是Java内存模型？
+Java内存模型描述了在多线程代码中哪些行为是合法的，以及线程如何通过内存进行交互。它描述了“程序中的变量“ 和 ”从内存或者寄存器获取或存储它们的底层细节”之间的关系。Java内存模型通过使用各种各样的硬件和编译器的优化来正确实现以上事情。
+
+Java包含了几个语言级别的关键字，包括：volatile, final以及synchronized，目的是为了帮助程序员向编译器描述一个程序的并发需求。Java内存模型定义了volatile和synchronized的行为，更重要的是保证了同步的java程序在所有的处理器架构下面都能正确的运行。
+
+“一个线程的写操作对其他线程可见”这个问题是因为编译器对代码进行重排序导致的。例如，只要代码移动不会改变程序的语义，当编译器认为程序中移动一个写操作到后面会更有效的时候，编译器就会对代码进行移动。如果编译器推迟执行一个操作，其他线程可能在这个操作执行完之前都不会看到该操作的结果，这反映了缓存的影响。
+
+此外，写入内存的操作能够被移动到程序里更前的时候。在这种情况下，其他的线程在程序中可能看到一个比它实际发生更早的写操作。所有的这些灵活性的设计是为了通过给编译器，运行时或硬件灵活性使其能在最佳顺序的情况下来执行操作。在内存模型的限定之内，我们能够获取到更高的性能。
+
+看下面代码展示的一个简单例子：
+
+ClassReordering {
+    
+    int x = 0, y = 0;
+   
+    public void writer() {
+        x = 1;
+        y = 2;
+    }
+
+    public void reader() {
+        int r1 = y;
+        int r2 = x;
+    }
+}
+让我们看在两个并发线程中执行这段代码，读取Y变量将会得到2这个值。因为这个写入比写到X变量更晚一些，程序员可能认为读取X变量将肯定会得到1。但是，写入操作可能被重排序过。如果重排序发生了，那么，就能发生对Y变量的写入操作，读取两个变量的操作紧随其后，而且写入到X这个操作能发生。程序的结果可能是r1变量的值是2，但是r2变量的值为0。
+
+但是面试官，有时候不这么认为，认为就是JVM内存结构
+JVM内存结构主要有三大块：堆内存、方法区和栈。
+
+堆内存是JVM中最大的一块由年轻代和老年代组成，而年轻代内存又被分成三部分，Eden空间、From Survivor空间、To Survivor空间,默认情况下年轻代按照8:1:1的比例来分配；方法区存储类信息、常量、静态变量等数据，是线程共享的区域，为与Java堆区分，方法区还有一个别名Non-Heap(非堆)；栈又分为java虚拟机栈和本地方法栈主要用于方法的执行。
+
+JAVA的JVM的内存可分为3个区：堆(heap)、栈(stack)和方法区(method)
+
+java堆（Java Heap）
+可通过参数 -Xms 和-Xmx设置
+Java堆是被所有线程共享,是Java虚拟机所管理的内存中最大的一块 Java堆在虚拟机启动时创建。
+Java堆唯一的目的是存放对象实例，几乎所有的对象实例和数组都在这里。
+Java堆为了便于更好的回收和分配内存，可以细分为：新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor区。
+新生代：包括Eden区、From Survivor区、To Survivor区，系统默认大小Eden:Survivor=8:1。
+老年代：在年轻代中经历了N次垃圾回收后仍然存活的对象，就会被放到年老代中。因此，可以认为年老代中存放的都是一些生命周期较长的对象。
+Survivor空间等Java堆可以处在物理上不连续的内存空间中，只要逻辑上是连续的即可（就像我们的磁盘空间一样。在实现时，既可以实现成固定大小的，也可以是可扩展的）。
+据Java虚拟机规范的规定，当方法区无法满足内存分配需求时，将抛出OutOfMemoryError异常。
+
+java虚拟机栈(stack)
+可通过参数 栈帧是方法运行期的基础数据结构栈容量可由-Xss设置
+
+1.Java虚拟机栈是线程私有的，它的生命周期与线程相同。
+
+每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。
+虚拟机栈是执行Java方法的内存模型(也就是字节码)服务：每个方法在执行的同时都会创建一个栈帧，用于存储局部变量表、操作数栈、动态链接、方法出口等信息。
+局部变量表：32位变量槽，存放了编译期可知的各种基本数据类型、对象引用、returnAddress类型。
+操作数栈：基于栈的执行引擎，虚拟机把操作数栈作为它的工作区，大多数指令都要从这里弹出数据、执行运算，然后把结果压回操作数栈。
+动态连接：每个栈帧都包含一个指向运行时常量池（方法区的一部分）中该栈帧所属方法的引用。持有这个引用是为了支持方法调用过程中的动态连接。Class文件的常量池中有大量的符号引用，字节码中的方法调用指令就以常量池中指向方法的符号引用为参数。这些符号引用一部分会在类加载阶段或第一次使用的时候转化为直接引用，这种转化称为静态解析。另一部分将在每一次的运行期间转化为直接应用，这部分称为动态连接
+方法出口：返回方法被调用的位置，恢复上层方法的局部变量和操作数栈，如果无返回值，则把它压入调用者的操作数栈。
+局部变量表所需的内存空间在编译期间完成分配，当进入一个方法时，这个方法需要在帧中分配多大的局部变量空间是完全确定的。
+在方法运行期间不会改变局部变量表的大小。主要存放了编译期可知的各种基本数据类型、对象引用（reference类型）、returnAddress类型）。
+java虚拟机栈,规定了两种异常状况：
+
+如果线程请求的深度大于虚拟机所允许的深度，将抛出StackOverflowError异常。
+如果虚拟机栈动态扩展，而扩展时无法申请到足够的内存，就会抛出OutOfMemoryError异常。
+本地方法栈
+可通过参数 栈容量可由-Xss设置
+
+虚拟机栈为虚拟机执行Java方法（也就是字节码）服务。
+本地方法栈则是为虚拟机使用到的Native方法服务。有的虚拟机（譬如Sun HotSpot虚拟机）直接就把本地方法栈和虚拟机栈合二为一
+方法区（Method Area）
+可通过参数-XX:MaxPermSize设置
+
+线程共享内存区域，用于储存已被虚拟机加载的类信息、常量、静态变量，即编译器编译后的代码，方法区也称持久代（Permanent Generation）。
+虽然Java虚拟机规范把方法区描述为堆的一个逻辑部分，但是它却有一个别名叫做Non-Heap（非堆），目的应该是与Java堆区分开来。
+如何实现方法区，属于虚拟机的实现细节，不受虚拟机规范约束。
+方法区主要存放java类定义信息，与垃圾回收关系不大，方法区可以选择不实现垃圾回收,但不是没有垃圾回收。
+方法区域的内存回收目标主要是针对常量池的回收和对类型的卸载。
+运行时常量池，也是方法区的一部分，虚拟机加载Class后把常量池中的数据放入运行时常量池。
+运行时常量池
+JDK1.6之前字符串常量池位于方法区之中。 JDK1.7字符串常量池已经被挪到堆之中。
+
+可通过参数-XX:PermSize和-XX:MaxPermSize设置
+
+常量池（Constant Pool）：常量池数据编译期被确定，是Class文件中的一部分。存储了类、方法、接口等中的常量，当然也包括字符串常量。
+字符串池/字符串常量池（String Pool/String Constant Pool）：是常量池中的一部分，存储编译期类中产生的字符串类型数据。
+运行时常量池（Runtime Constant Pool）：方法区的一部分，所有线程共享。虚拟机加载Class后把常量池中的数据放入到运行时常量池。常量池：可以理解为Class文件之中的资源仓库，它是Class文件结构中与其他项目资源关联最多的数据类型。
+常量池中主要存放两大类常量：字面量（Literal）和符号引用（Symbolic Reference）。
+字面量：文本字符串、声明为final的常量值等。
+符号引用：类和接口的完全限定名（Fully Qualified Name）、字段的名称和描述符（Descriptor）、方法的名称和描述符。
+直接内存
+可通过-XX:MaxDirectMemorySize指定，如果不指定，则默认与Java堆的最大值（-Xmx指定）一样。
+
+直接内存（Direct Memory）并不是虚拟机运行时数据区的一部分，也不是Java虚拟机规范中定义的内存区域，但是这部分内存也被频繁地使用，而且也可能导致OutOfMemoryError异常出现。
+总结的简单一点
+java堆（Java Heap）
+
+可通过参数 -Xms 和-Xmx设置
+
+Java堆是被所有线程共享,是Java虚拟机所管理的内存中最大的一块 Java堆在虚拟机启动时创建
+Java堆唯一的目的是存放对象实例，几乎所有的对象实例和数组都在这里
+Java堆为了便于更好的回收和分配内存，可以细分为：新生代和老年代；再细致一点的有Eden空间、From Survivor空间、To Survivor区
+新生代：包括Eden区、From Survivor区、To Survivor区，系统默认大小Eden:Survivor=8:1。
+老年代：在年轻代中经历了N次垃圾回收后仍然存活的对象，就会被放到年老代中。因此，可以认为年老代中存放的都是一些生命周期较长的对象。
+java虚拟机栈(stack)
+
+可通过参数 栈帧是方法运行期的基础数据结构栈容量可由-Xss设置
+
+Java虚拟机栈是线程私有的，它的生命周期与线程相同。
+每一个方法被调用直至执行完成的过程，就对应着一个栈帧在虚拟机栈中从入栈到出栈的过程。
+虚拟机栈是执行Java方法的内存模型(也就是字节码)服务：每个方法在执行的同时都会创建一个栈帧，用于存储 局部变量表、操作数栈、动态链接、方法出口等信息
+方法区（Method Area）
+
+可通过参数-XX:MaxPermSize设置
+
+线程共享内存区域），用于储存已被虚拟机加载的类信息、常量、静态变量，即编译器编译后的代码，方法区也称持久代（Permanent Generation）。
+方法区主要存放java类定义信息，与垃圾回收关系不大，方法区可以选择不实现垃圾回收,但不是没有垃圾回收。
+方法区域的内存回收目标主要是针对常量池的回收和对类型的卸载。
+运行时常量池，也是方法区的一部分，虚拟机加载Class后把常量池中的数据放入运行时常量池。
+什么是CAS？
+CAS（compare and swap）的缩写，中文翻译成比较并交换。
+
+CAS 不通过JVM,直接利用java本地方 JNI（Java Native Interface为JAVA本地调用）,直接调用CPU 的cmpxchg（是汇编指令）指令。
+
+利用CPU的CAS指令，同时借助JNI来完成Java的非阻塞算法,实现原子操作。其它原子操作都是利用类似的特性完成的。
+
+整个java.util.concurrent都是建立在CAS之上的，因此对于synchronized阻塞算法，J.U.C在性能上有了很大的提升。
+
+CAS是项乐观锁技术，当多个线程尝试使用CAS同时更新同一个变量时，只有其中一个线程能更新变量的值，而其它线程都失败，失败的线程并不会被挂起，而是被告知这次竞争中失败，并可以再次尝试。
+
+CAS应用
+CAS有3个操作数，内存值V，旧的预期值A，要修改的新值B。当且仅当预期值A和内存值V相同时，将内存值V修改为B，否则什么都不做。
+
+CAS优点
+确保对内存的读-改-写操作都是原子操作执行
+
+CAS缺点
+CAS虽然很高效的解决原子操作，但是CAS仍然存在三大问题。ABA问题，循环时间长开销大和只能保证一个共享变量的原子操作
+
+总结
+使用CAS在线程冲突严重时，会大幅降低程序性能；CAS只适合于线程冲突较少的情况使用。
+synchronized在jdk1.6之后，已经改进优化。synchronized的底层实现主要依靠Lock-Free的队列，基本思路是自旋后阻塞，竞争切换后继续竞争锁，稍微牺牲了公平性，但获得了高吞吐量。在线程冲突较少的情况下，可以获得和CAS类似的性能；而线程冲突严重的情况下，性能远高于CAS。
+参考 https://blog.52itstyle.com/archives/948/
+
+什么是乐观锁和悲观锁？
+悲观锁
+Java在JDK1.5之前都是靠synchronized关键字保证同步的，这种通过使用一致的锁定协议来协调对共享状态的访问，可以确保无论哪个线程持有共享变量的锁，都采用独占的方式来访问这些变量。独占锁其实就是一种悲观锁，所以可以说synchronized是悲观锁。
+
+乐观锁
+乐观锁（ Optimistic Locking）其实是一种思想。相对悲观锁而言，乐观锁假设认为数据一般情况下不会造成冲突，所以在数据进行提交更新的时候，才会正式对数据的冲突与否进行检测，如果发现冲突了，则让返回用户错误的信息，让用户决定如何去做。
+
+什么是AQS？
+AbstractQueuedSynchronizer简称AQS，是一个用于构建锁和同步容器的框架。事实上concurrent包内许多类都是基于AQS构建，例如ReentrantLock，Semaphore，CountDownLatch，ReentrantReadWriteLock，FutureTask等。AQS解决了在实现同步容器时设计的大量细节问题。
+
+AQS使用一个FIFO的队列表示排队等待锁的线程，队列头节点称作“哨兵节点”或者“哑节点”，它不与任何线程关联。其他的节点与等待线程关联，每个节点维护一个等待状态waitStatus。
+
+CAS 原子操作在concurrent包的实现
+参考 https://blog.52itstyle.com/archives/948/
+
+由于java的CAS同时具有 volatile 读和volatile写的内存语义，因此Java线程之间的通信现在有了下面四种方式：
+
+A线程写volatile变量，随后B线程读这个volatile变量。
+A线程写volatile变量，随后B线程用CAS更新这个volatile变量。
+A线程用CAS更新一个volatile变量，随后B线程用CAS更新这个volatile变量。
+A线程用CAS更新一个volatile变量，随后B线程读这个volatile变量。
+Java的CAS会使用现代处理器上提供的高效机器级别原子指令，这些原子指令以原子方式对内存执行读-改-写操作，这是在多处理器中实现同步的关键（从本质上来说，能够支持原子性读-改-写指令的计算机器，是顺序计算图灵机的异步等价机器，因此任何现代的多处理器都会去支持某种能对内存执行原子性读-改-写操作的原子指令）。同时，volatile变量的读/写和CAS可以实现线程之间的通信。把这些特性整合在一起，就形成了整个concurrent包得以实现的基石。如果我们仔细分析concurrent包的源代码实现，会发现一个通用化的实现模式：
+
+首先，声明共享变量为volatile； 然后，使用CAS的原子条件更新来实现线程之间的同步；
+
+同时，配合以volatile的读/写和CAS所具有的volatile读和写的内存语义来实现线程之间的通信。
+
+AQS，非阻塞数据结构和原子变量类（Java.util.concurrent.atomic包中的类），这些concurrent包中的基础类都是使用这种模式来实现的，而concurrent包中的高层类又是依赖于这些基础类来实现的。从整体来看，concurrent包的实现示意图如下：
+
+
+
+
+
+
+AQS没有锁之类的概念，它有个state变量，是个int类型，在不同场合有着不同含义。
+
+AQS围绕state提供两种基本操作“获取”和“释放”，有条双向队列存放阻塞的等待线程，并提供一系列判断和处理方法，简单说几点：
+
+state是独占的，还是共享的；
+state被获取后，其他线程需要等待；
+state被释放后，唤醒等待线程；
+线程等不及时，如何退出等待。
+至于线程是否可以获得state，如何释放state，就不是AQS关心的了，要由子类具体实现。
+
+AQS中还有一个表示状态的字段state，例如ReentrantLocky用它表示线程重入锁的次数，Semaphore用它表示剩余的许可数量，FutureTask用它表示任务的状态。对state变量值的更新都采用CAS操作保证更新操作的原子性。
+
+AbstractQueuedSynchronizer继承了AbstractOwnableSynchronizer，这个类只有一个变量：exclusiveOwnerThread，表示当前占用该锁的线程，并且提供了相应的get，set方法。
+
+ReentrantLock实现原理
+
+https://www.cnblogs.com/maypattis/p/6403682.html
+
+什么是原子操作？在Java Concurrency API中有哪些原子类(atomic classes)？
+原子操作是指一个不受其他操作影响的操作任务单元。原子操作是在多线程环境下避免数据不一致必须的手段。
+
+int++并不是一个原子操作，所以当一个线程读取它的值并加1时，另外一个线程有可能会读到之前的值，这就会引发错误。
+
+为了解决这个问题，必须保证增加操作是原子的，在JDK1.5之前我们可以使用同步技术来做到这一点。
+
+到JDK1.5，java.util.concurrent.atomic包提供了int和long类型的装类，它们可以自动的保证对于他们的操作是原子的并且不需要使用同步。
+
+什么是Executors框架？
+Executor框架同java.util.concurrent.Executor 接口在Java 5中被引入。
+
+Executor框架是一个根据一组执行策略调用，调度，执行和控制的异步任务的框架。
+
+无限制的创建线程会引起应用程序内存溢出。所以创建一个线程池是个更好的的解决方案，因为可以限制线程的数量并且可以回收再利用这些线程。
+
+利用Executors框架可以非常方便的创建一个线程池，
+
+Java通过Executors提供四种线程池，分别为：
+
+newCachedThreadPool创建一个可缓存线程池，如果线程池长度超过处理需要，可灵活回收空闲线程，若无可回收，则新建线程。
+
+newFixedThreadPool 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待。
+
+newScheduledThreadPool 创建一个定长线程池，支持定时及周期性任务执行。
+
+newSingleThreadExecutor 创建一个单线程化的线程池，它只会用唯一的工作线程来执行任务，保证所有任务按照指定顺序(FIFO, LIFO, 优先级)执行。
+
+什么是阻塞队列？如何使用阻塞队列来实现生产者-消费者模型？
+JDK7提供了7个阻塞队列。（也属于并发容器）
+
+ArrayBlockingQueue ：一个由数组结构组成的有界阻塞队列。
+LinkedBlockingQueue ：一个由链表结构组成的有界阻塞队列。
+PriorityBlockingQueue ：一个支持优先级排序的无界阻塞队列。
+DelayQueue：一个使用优先级队列实现的无界阻塞队列。
+SynchronousQueue：一个不存储元素的阻塞队列。
+LinkedTransferQueue：一个由链表结构组成的无界阻塞队列。
+LinkedBlockingDeque：一个由链表结构组成的双向阻塞队列。
+什么是阻塞队列？
+阻塞队列是一个在队列基础上又支持了两个附加操作的队列。
+
+2个附加操作：
+
+支持阻塞的插入方法：队列满时，队列会阻塞插入元素的线程，直到队列不满。 支持阻塞的移除方法：队列空时，获取元素的线程会等待队列变为非空。
+
+阻塞队列的应用场景
+阻塞队列常用于生产者和消费者的场景，生产者是向队列里添加元素的线程，消费者是从队列里取元素的线程。简而言之，阻塞队列是生产者用来存放元素、消费者获取元素的容器。
+
+几个方法
+在阻塞队列不可用的时候，上述2个附加操作提供了四种处理方法
+
+方法\处理方式抛出异常返回特殊值一直阻塞超时退出插入方法add(e)offer(e)put(e)offer(e,time,unit)移除方法remove()poll()take()poll(time,unit)检查方法element()peek()不可用不可用
+
+JAVA里的阻塞队列
+JDK 7 提供了7个阻塞队列，如下
+
+1、ArrayBlockingQueue 数组结构组成的有界阻塞队列。
+
+此队列按照先进先出（FIFO）的原则对元素进行排序，但是默认情况下不保证线程公平的访问队列，即如果队列满了，那么被阻塞在外面的线程对队列访问的顺序是不能保证线程公平（即先阻塞，先插入）的。
+
+2、LinkedBlockingQueue一个由链表结构组成的有界阻塞队列
+
+此队列按照先出先进的原则对元素进行排序
+
+3、PriorityBlockingQueue支持优先级的无界阻塞队列
+
+4、DelayQueue支持延时获取元素的无界阻塞队列，即可以指定多久才能从队列中获取当前元素
+
+5、SynchronousQueue不存储元素的阻塞队列，每一个put必须等待一个take操作，否则不能继续添加元素。并且他支持公平访问队列。
+
+6、LinkedTransferQueue由链表结构组成的无界阻塞TransferQueue队列。相对于其他阻塞队列，多了tryTransfer和transfer方法
+
+transfer方法
+
+如果当前有消费者正在等待接收元素（take或者待时间限制的poll方法），transfer可以把生产者传入的元素立刻传给消费者。如果没有消费者等待接收元素，则将元素放在队列的tail节点，并等到该元素被消费者消费了才返回。
+
+tryTransfer方法
+
+用来试探生产者传入的元素能否直接传给消费者。，如果没有消费者在等待，则返回false。和上述方法的区别是该方法无论消费者是否接收，方法立即返回。而transfer方法是必须等到消费者消费了才返回。
+
+7、LinkedBlockingDeque链表结构的双向阻塞队列，优势在于多线程入队时，减少一半的竞争。
+
+如何使用阻塞队列来实现生产者-消费者模型？
+通知模式实现：所谓通知模式，就是当生产者往满的队列里添加元素时会阻塞住生产者，当消费者消费了一个队列中的元素后，会通知生产者当前队列可用。
+
+使用BlockingQueue解决生产者消费者问题
+为什么BlockingQueue适合解决生产者消费者问题
+
+任何有效的生产者-消费者问题解决方案都是通过控制生产者put()方法（生产资源）和消费者take()方法（消费资源）的调用来实现的，一旦你实现了对方法的阻塞控制，那么你将解决该问题。
+
+Java通过BlockingQueue提供了开箱即用的支持来控制这些方法的调用（一个线程创建资源，另一个消费资源）。java.util.concurrent包下的BlockingQueue接口是一个线程安全的可用于存取对象的队列。
+
+BlockingQueue是一种数据结构，支持一个线程往里存资源，另一个线程从里取资源。这正是解决生产者消费者问题所需要的，那么让我们开始解决该问题吧。
+
+生产者
+
+以下代码用于生产者线程
+
+package io.ymq.example.thread;
+
+import java.util.concurrent.BlockingQueue;
+
+/**
+ * 描述:生产者
+ *
+ * @author yanpenglei
+ * @create 2018-03-14 15:52
+ **/
+class Producer implements Runnable {
+
+    protected BlockingQueue<Object> queue;
+
+    Producer(BlockingQueue<Object> theQueue) {
+        this.queue = theQueue;
+    }
+
+    public void run() {
+        try {
+            while (true) {
+                Object justProduced = getResource();
+                queue.put(justProduced);
+                System.out.println("生产者资源队列大小= " + queue.size());
+            }
+        } catch (InterruptedException ex) {
+            System.out.println("生产者 中断");
+        }
+    }
+
+    Object getResource() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            System.out.println("生产者 读 中断");
+        }
+        return new Object();
+    }
+}
+消费者
+
+以下代码用于消费者线程
+
+package io.ymq.example.thread;
+
+import java.util.concurrent.BlockingQueue;
+
+/**
+ * 描述: 消费者
+ *
+ * @author yanpenglei
+ * @create 2018-03-14 15:54
+ **/
+class Consumer implements Runnable {
+    protected BlockingQueue<Object> queue;
+
+    Consumer(BlockingQueue<Object> theQueue) {
+        this.queue = theQueue;
+    }
+
+    public void run() {
+        try {
+            while (true) {
+                Object obj = queue.take();
+                System.out.println("消费者 资源 队列大小 " + queue.size());
+                take(obj);
+            }
+        } catch (InterruptedException ex) {
+            System.out.println("消费者 中断");
+        }
+    }
+
+    void take(Object obj) {
+        try {
+            Thread.sleep(100); // simulate time passing
+        } catch (InterruptedException ex) {
+            System.out.println("消费者 读 中断");
+        }
+        System.out.println("消费对象 " + obj);
+    }
+}
+测试该解决方案是否运行正常
+
+package io.ymq.example.thread;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+
+/**
+ * 描述: 测试
+ *
+ * @author yanpenglei
+ * @create 2018-03-14 15:58
+ **/
+public class ProducerConsumerExample {
+
+    public static void main(String[] args) throws InterruptedException {
+
+        int numProducers = 4;
+        int numConsumers = 3;
+
+        BlockingQueue<Object> myQueue = new LinkedBlockingQueue<Object>(5);
+
+        for (int i = 0; i < numProducers; i++) {
+            new Thread(new Producer(myQueue)).start();
+        }
+
+        for (int i = 0; i < numConsumers; i++) {
+            new Thread(new Consumer(myQueue)).start();
+        }
+
+        Thread.sleep(1000);
+
+        System.exit(0);
+    }
+}
+运行结果
+
+生产者资源队列大小= 1
+生产者资源队列大小= 1
+消费者 资源 队列大小 1
+生产者资源队列大小= 1
+消费者 资源 队列大小 1
+消费者 资源 队列大小 1
+生产者资源队列大小= 1
+生产者资源队列大小= 3
+消费对象 java.lang.Object@1e1aa52b
+生产者资源队列大小= 2
+生产者资源队列大小= 5
+消费对象 java.lang.Object@6e740a76
+消费对象 java.lang.Object@697853f6
+
+......
+
+消费对象 java.lang.Object@41a10cbc
+消费对象 java.lang.Object@4963c8d1
+消费者 资源 队列大小 5
+生产者资源队列大小= 5
+生产者资源队列大小= 5
+消费者 资源 队列大小 4
+消费对象 java.lang.Object@3e49c35d
+消费者 资源 队列大小 4
+生产者资源队列大小= 5
+从输出结果中,我们可以发现队列大小永远不会超过5，消费者线程消费了生产者生产的资源。
+
+什么是Callable和Future?
+Callable 和 Future 是比较有趣的一对组合。当我们需要获取线程的执行结果时，就需要用到它们。Callable用于产生结果，Future用于获取结果。
+
+Callable接口使用泛型去定义它的返回类型。Executors类提供了一些有用的方法去在线程池中执行Callable内的任务。由于Callable任务是并行的，必须等待它返回的结果。java.util.concurrent.Future对象解决了这个问题。
+
+在线程池提交Callable任务后返回了一个Future对象，使用它可以知道Callable任务的状态和得到Callable返回的执行结果。Future提供了get()方法，等待Callable结束并获取它的执行结果。
+
+代码示例
+
+Callable 是一个接口，它只包含一个call()方法。Callable是一个返回结果并且可能抛出异常的任务。
+
+为了便于理解，我们可以将Callable比作一个Runnable接口，而Callable的call()方法则类似于Runnable的run()方法。
+
+public class CallableFutureTest {
+
+    public static void main(String[] args) throws InterruptedException, ExecutionException {
+
+        System.out.println("start main thread ");
+
+        ExecutorService exec = Executors.newFixedThreadPool(2);
+
+        //新建一个Callable 任务，并将其提交到一个ExecutorService. 将返回一个描述任务情况的Future.
+        Callable<String> call = new Callable<String>() {
+
+            @Override
+            public String call() throws Exception {
+                System.out.println("start new thread ");
+                Thread.sleep(5000);
+                System.out.println("end new thread ");
+                return "我是返回的内容";
+            }
+        };
+
+        Future<String> task = exec.submit(call);
+        Thread.sleep(1000);
+        String retn = task.get();
+        //关闭线程池
+        exec.shutdown();
+        System.out.println(retn + "--end main thread");
+    }
+}
+控制台打印
+
+start main thread 
+start new thread 
+end new thread 
+我是返回的内容--end main thread
