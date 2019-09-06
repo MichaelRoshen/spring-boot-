@@ -23,6 +23,7 @@
 - 快速开发一个自定义Spring Boot Starter，并使用它: https://www.jianshu.com/p/45538b44e04e
 - SpringBoot通过RequestContextHolder获取HttpRequest和HttpResponse: https://blog.csdn.net/SUDDEV/article/details/79464574
 - SpringBoot项目实战（8）：四种读取properties文件的方式: https://www.imooc.com/article/18252
+- 如何在 Spring 异步调用中传递上下文: https://juejin.im/post/5d42ef2ef265da03cd0a5f23
 
 
 ## 技术方案
