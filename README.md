@@ -26,6 +26,9 @@
 - SpringBoot项目实战（8）：四种读取properties文件的方式: https://www.imooc.com/article/18252
 - 如何在 Spring 异步调用中传递上下文: https://juejin.im/post/5d42ef2ef265da03cd0a5f23
 
+## 安全
+- 如何防止CSRF攻击？ https://tech.meituan.com/2018/10/11/fe-security-csrf.html
+
 
 ## 技术方案
 - Spring Boot 构建多租户SaaS平台核心技术指南：https://juejin.im/post/5ceaff9a51882531140790a4
