@@ -28,6 +28,7 @@
 
 ## 安全
 - 如何防止CSRF攻击？ https://tech.meituan.com/2018/10/11/fe-security-csrf.html
+- RSA非对称加密，如果字符串过长会导致加密解密失败，解决方式：使用RSA分段加密
 
 
 ## 技术方案
