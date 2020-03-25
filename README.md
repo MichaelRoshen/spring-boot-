@@ -186,4 +186,37 @@ List<User> unique1 = list.stream().collect(
 
 ```
 
+```
+List<Map> list = new ArrayList<>();
+Map channelData = new HashMap();
+channelData.put("name", "xx");
+channelData.put("count", 7);
+list.add(channelData);
+Map channelData1 = new HashMap();
+channelData1.put("name", "yy");
+channelData1.put("count", 2);
+list.add(channelData1);
+
+//从大到小
+        List<Map> result = list.stream().sorted((a,b) -> ((Integer)b.get("count")).compareTo((Integer)a.get("count"))).collect(Collectors.toList());
+        
+//从小到大
+        List<Map> result = list.stream().sorted((a,b) -> ((Integer)a.get("count")).compareTo((Integer)b.get("count"))).collect(Collectors.toList());
+
+//从小到大可以简写为：（但是从大到小不能简写）
+        List<Map> result = list.stream().sorted(Comparator.comparing(a -> ((Integer) a.get("count")))).collect(Collectors.toList());
+
+System.out.println(result);
+
+Collections.sort(list, (o1, o2) -> {
+    Integer v1 = (Integer) o1.get("totalNewUser");
+    Integer v2 = (Integer) o2.get("totalNewUser");
+    return v2.compareTo(v1);
+});
+
+
+
+System.out.println(list);
+```
+
 
