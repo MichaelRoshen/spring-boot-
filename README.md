@@ -219,4 +219,41 @@ Collections.sort(list, (o1, o2) -> {
 System.out.println(list);
 ```
 
+两个List<Map> 按指定的key合并
+```
+List<Map> list1 = new ArrayList<>();
+        Map map1 = new HashMap();
+        map1.put("channel", "c1");
+        map1.put("data", 23);
+        Map map2 = new HashMap();
+        map2.put("channel", "c2");
+        map2.put("data", 20);
+        list1.add(map1);
+        list1.add(map2);
+
+        List<Map> list2 = new ArrayList<>();
+        Map map3 = new HashMap();
+        map3.put("channel", "c1");
+        map3.put("data", 100);
+        Map map4 = new HashMap();
+        map4.put("channel", "c2");
+        map4.put("data", 102);
+        list2.add(map3);
+        list2.add(map4);
+
+
+        List<Map> result = list1.stream()
+                .flatMap(x ->
+                        list2.stream().filter(y -> x.get("channel").equals(y.get("channel"))).map(y -> {
+                            Map temp = new HashMap();
+                            temp.put("channel", x.get("channel"));
+                            temp.put("x", x.get("data"));
+                            temp.put("y", y.get("data"));
+                            return temp;
+                        })
+                ).collect(Collectors.toList());
+
+        System.out.println(result);
+```        
+
 
