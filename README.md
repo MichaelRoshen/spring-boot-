@@ -27,6 +27,10 @@
 - 如何在 Spring 异步调用中传递上下文: https://juejin.im/post/5d42ef2ef265da03cd0a5f23
 - springboot项目中使用设计模式一策略模式: https://www.cnblogs.com/xiufengchen/p/11609691.html
 
+
+## 工具
+- java文件下载中文乱码问题 https://blog.csdn.net/yutianxu1986/article/details/82595290
+
 ## 安全
 - 如何防止CSRF攻击？ https://tech.meituan.com/2018/10/11/fe-security-csrf.html
 - RSA非对称加密，如果字符串过长会导致加密解密失败，解决方式：使用RSA分段加密
